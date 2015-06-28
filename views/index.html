@@ -8,7 +8,7 @@
 		<h1>Bridge</h1>
 		<div class="home" ng-controller="HomeController">
 			<div ng-repeat="button in buttons">
-				<div class="button">{{ button }}</div>
+				<div class="button" ng-click="buttonClick ()">{{ button }}</div>
 			</div>
 		</div>
 	</body>
