@@ -11,7 +11,7 @@ var express = require('express'),
 	app = express(),
 	server = http.createServer(app);
 
-var GameCore = require('./game.server.js');
+var GameCore = require('./game.core.js');
 var Player = GameCore.Player;
 var GameHandle = new GameCore.GameHandle;
 
