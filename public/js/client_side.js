@@ -1,18 +1,9 @@
-// angular.js is not browserified so we have to require the file
-// without assigning it a value. This will pull the whole file injector
-// out bundle.js
-require('../../bower_components/angular/angular.js');
+var socket = io.connect('http://localhost:3000');
 
-//Controllers required here
-var HomeController = require('./controllers/HomeController');
+socket.on('on_connected', function (data) {
+	console.log('Successfully connected to websocket. My id is ' + data.id);
+});
 
-//Services required here
-var GameService = require('./services/game');
-
-
-var app = angular.module('bridge', []);
-
-// GameService is a dependency of HomeController so it
-// must come first
-GameService(app);
-HomeController(app);
+socket.on('number_player', function (data) {
+	$('.number-of-players').html('<p>' + data.numberOfPlayers + ' out of 4 players</p>');
+});
