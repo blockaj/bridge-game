@@ -1,15 +1,14 @@
 <html>
 	<head>
 		<title>Bridge</title>
+		<script src="../public/js/jquery-2.1.4.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="../public/js/pace.min.js"></script>
 		<script src="../public/js/bundle.js"></script>
 		<link rel="stylesheet" href="../public/css/style.css" />
 	</head>
-	<body ng-app="bridge">
+	<body>
 		<h1>Bridge</h1>
-		<div class="home" ng-controller="HomeController">
-			<div ng-repeat="button in buttons">
-				<div class="button" ng-click="buttonClick ()">{{ button }}</div>
-			</div>
-		</div>
+		<div class="number-of-players"></div>
 	</body>
 </html>
