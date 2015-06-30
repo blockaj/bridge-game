@@ -3,6 +3,7 @@
   "description": "A multiplayer bridge game",
   "version": "0.0.0",
   "dependencies": {
+    "chalk": "^1.0.0",
     "express": "^4.13.0",
     "gulp": "^3.9.0",
     "gulp-browserify": "^0.5.1",
