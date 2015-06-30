@@ -3,21 +3,37 @@
 h1 {
 	font-family: sans-serif;
 	text-align: center;
+	font-size: 3em;
 	color: @big-blue;
 }
-.button {
+.card {
+	cursor: pointer;
+	line-height: 130px;
+	text-align: center;
+	font-size: 100px;
+	transition: all 0.3s ease;
+	&:hover {
+		color: rgb(41, 170, 218);
+	}
+}
+.number-of-players {
+	margin-top: 17%;
+	text-align: center;
+	font-size: 10pt;
+}
+img {
+	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	text-align: center;
-	font-family: sans-serif;
-	line-height: 150px;
-	font-size: 1.3em;
-	font-weight: 300;
-	color: #fff;
-	border-radius: 2px;
-	margin-top: 5px;
-	height: 150px;
-	width: 200px;
-	padding: 10px 15px;
-	background-color: @big-blue;
+}
+.hand-container {
+	position: absolute;
+	width: 100%;
+	height: 130px;
+	bottom: 0;
+}
+.hand {
+	width: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
