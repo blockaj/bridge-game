@@ -20,10 +20,11 @@ GameCore.prototype.assignTeams = function (players) {
 GameCore.prototype.dealCards = function () {
 	//Shuffle the deck
 	this.cardDeck.cards = shuffle(this.cardDeck.cards);
-	for (var i = 0; i < 12; i++) {
-		for (var v = 0; v < 1; v++) {
-			for (var t = 0; t < 1; t++) {
-				this.teams[t].players[v].hand.push(4*i+t+2*v);
+	for (var i = 0; i < 13; i++) {
+		for (var v = 0; v < 2; v++) {
+			for (var t = 0; t < 2; t++) {
+				this.teams[t].players[v].hand.push(this.cardDeck.cards[4*i+t+2*v]);
+				console.log(this.teams[t].players[v].hand);
 			}
 		}
 	}
@@ -51,6 +52,6 @@ var Team = function () {
 };
 
 module.exports = {
-	GameHandle: GameCore,
-	Player: Player
+	GameHandle: new GameCore,
+	Player: Player,
 };
