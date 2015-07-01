@@ -30,6 +30,18 @@ GameCore.prototype.dealCards = function () {
 	}
 };
 
+GameCore.prototype.findPlayer = function (playerToFind, callback) {
+	var numberOfPlayersAndTeams = 2;
+	for (var i = 0; i < numberOfPlayersAndTeams; i++) {
+		for (var t = 0; t < numberOfPlayersAndTeams; t++) {
+			var currentPlayer = this.teams[t].players[i];
+			if (currentPlayer.userId == playerToFind.userId) {
+				callback();
+			}
+		}
+	}
+}
+
 var CardDeck = function () {
 	// Generate a deck of cards in the form of a
 	// 52 element array
