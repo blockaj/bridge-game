@@ -2,13 +2,15 @@ var gulp = require('gulp'),
 	less = require('gulp-less'),
 	browserify = require('gulp-browserify'),
 	rename = require('gulp-rename'),
-	watch = require('gulp-watch');
+	watch = require('gulp-watch'),
+	minifyCss = require('gulp-minify-css');
 
 gulp.task('less', function () {
 	return gulp.src('./public/less/main.less')
 		.pipe(less({
 			paths: ['./public/less', __dirname]
 		}))
+		.pipe(minifyCss())
 		.pipe(rename('style.css'))
 		.pipe(gulp.dest('./public/css/'));
 });

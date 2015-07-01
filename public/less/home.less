@@ -8,13 +8,16 @@ h1 {
 }
 .card {
 	cursor: pointer;
-	line-height: 130px;
 	text-align: center;
 	font-size: 100px;
-	transition: all 0.3s ease;
+	transition: all 0.5s ease;
 	&:hover {
-		color: rgb(41, 170, 218);
+		border-radius: 5px;
+		border: 3px solid @big-blue;
 	}
+}
+.red {
+	color: #de0909;
 }
 .number-of-players {
 	margin-top: 17%;
@@ -33,7 +36,11 @@ img {
 	bottom: 0;
 }
 .hand {
-	width: auto;
-	margin-left: auto;
-	margin-right: auto;
+	text-align: center;
+}
+.partner {
+	text-align: center;
+	.card {
+		font-size: 75px;
+	}
 }

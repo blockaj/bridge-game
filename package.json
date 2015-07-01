@@ -13,5 +13,8 @@
     "knuth-shuffle": "^1.0.1",
     "node-uuid": "^1.4.3",
     "socket.io": "^1.3.5"
+  },
+  "devDependencies": {
+    "gulp-minify-css": "^1.2.0"
   }
 }

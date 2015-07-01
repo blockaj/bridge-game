@@ -186,8 +186,19 @@ socket.on('ready', function () {
 
 socket.on('hand', function (data) {
 	var hand = data.hand.sort(sortNumber);
+	console.log(hand);
 	$('.hand').html('');
 	for (var i = 0; i < 13; i++) {
-		$('.hand').append('<span class="card" draggable>' + cardToString(hand[i]) + '</span>');
+		if (hand[i] > 13 && hand[i] < 40) {
+			$('.hand').append('<span class="red card">' + cardToString(hand[i]) + '</span>');
+		} else {
+			$('.hand').append('<span class="black card">' + cardToString(hand[i]) + '</span>');
+		}
+		$('.partner').append('<span class="card">&#127136;</span>');
 	}
+});
+
+socket.on('disconnected', function() {
+	$('body').html('<center><p>Player disconnected. Reload page to begin.</p></center>');
+	socket.disconnect();
 });

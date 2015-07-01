@@ -79,6 +79,7 @@ sio.sockets.on('connection', function (client) {
 				sio.emit('number_player', {numberOfPlayers: connected_players.length});
 			}
 		}
+		sio.emit('disconnected');
 		console.log('\t' + library(' :: socket.io :: ') + 'player ' + client.userid + ' disconnected');
 	});
 
