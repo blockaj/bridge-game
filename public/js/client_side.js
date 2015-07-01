@@ -1,3 +1,15 @@
+/*=====================================
+ * All client side related code
+ *
+ * DEPENDENCIES
+ *   - jQuery
+ *   - Socket.io
+ *=====================================*/
+
+
+// USERID is set assigned a value when the client
+// connects to the server and is then used to
+// let the server know what cards to give to who
 var USERID;
 
 function cardToString(cardNumber) {
@@ -179,8 +191,7 @@ socket.on('number_player', function (data) {
 });
 
 socket.on('ready', function () {
-	$('img').remove();
-	$('.number-of-players').remove();
+	removeLoadingEl();
 	socket.emit('hand_request', {id: USERID});
 });
 
@@ -188,6 +199,21 @@ socket.on('hand', function (data) {
 	var hand = data.hand.sort(sortNumber);
 	console.log(hand);
 	$('.hand').html('');
+	placeCards(hand);
+
+});
+
+socket.on('disconnected', function() {
+	$('body').html('<center><p>Player disconnected. Reload page to begin.</p></center>');
+	socket.disconnect();
+});
+
+function removeLoadingEl() {
+	$('img').remove();
+	$('.number-of-players').remove();
+}
+
+function placeCards(hand) {
 	for (var i = 0; i < 13; i++) {
 		if (hand[i] > 13 && hand[i] < 40) {
 			$('.hand').append('<span class="red card">' + cardToString(hand[i]) + '</span>');
@@ -196,9 +222,4 @@ socket.on('hand', function (data) {
 		}
 		$('.partner').append('<span class="card">&#127136;</span>');
 	}
-});
-
-socket.on('disconnected', function() {
-	$('body').html('<center><p>Player disconnected. Reload page to begin.</p></center>');
-	socket.disconnect();
-});
+}

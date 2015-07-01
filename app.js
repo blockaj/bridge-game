@@ -1,3 +1,14 @@
+/*=============================================
+ * Handles all interactions between server and
+ * client and updates game model
+ *
+ * DEPENDENCIES
+ * - Express
+ * - Socket.io
+ * - Chalk
+ * - node-uuid
+ * - game.core.js
+ *=============================================*/
 var express = require('express'),
 	http = require('http'),
 	io = require('socket.io'),
