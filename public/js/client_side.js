@@ -191,8 +191,10 @@ socket.on('number_player', function (data) {
 });
 
 socket.on('ready', function () {
-	removeLoadingEl();
-	socket.emit('hand_request', {id: USERID});
+	setTimeout(function () {
+		removeLoadingEl();
+		socket.emit('hand_request', {id: USERID});
+	}, 500);
 });
 
 socket.on('hand', function (data) {
@@ -204,8 +206,6 @@ socket.on('hand', function (data) {
 });
 
 socket.on('disconnected', function() {
-	$('body').html('<center><p>Player disconnected. Reload page to begin.</p></center>');
-	socket.disconnect();
 });
 
 function removeLoadingEl() {
@@ -214,11 +214,14 @@ function removeLoadingEl() {
 }
 
 function placeCards(hand) {
+	$('.partner').html('');
 	for (var i = 0; i < 13; i++) {
 		if (hand[i] > 13 && hand[i] < 40) {
-			$('.hand').append('<span class="red card">' + cardToString(hand[i]) + '</span>');
+			$('.hand').append('<span class="red card">' + cardToString(hand[i]) +
+							'</span>');
 		} else {
-			$('.hand').append('<span class="black card">' + cardToString(hand[i]) + '</span>');
+			$('.hand').append('<span class="black card">' + cardToString(hand[i]) +
+							'</span>');
 		}
 		$('.partner').append('<span class="card">&#127136;</span>');
 	}

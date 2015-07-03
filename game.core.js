@@ -3,6 +3,7 @@ var shuffle = require('knuth-shuffle').knuthShuffle;
 var Player = function (userId) {
 	this.userId = userId;
 	this.hand = [];
+	this.position = '';
 };
 
 var GameCore = function () {
@@ -17,14 +18,35 @@ GameCore.prototype.assignTeams = function (players) {
 	this.teams[1].players = [players[1], players[3]];
 };
 
+GameCore.prototype.assignPosition = function () {
+
+};
+
+GameCore.prototype.forEachPlayer = function(callback) {
+	for (var v = 0; v < 2; v++) {
+		for (var t = 0; t < 2; t++) {
+			
+		}
+	}
+};
+
+GameCore.prototype.cleanHands = function () {
+	for (var v = 0; v < 2; v++) {
+		for (var t = 0; t < 2; t++) {
+			this.teams[t].players[v].hand = [];
+		}
+	}
+};
+
 GameCore.prototype.dealCards = function () {
+	this.cleanHands();
+
 	//Shuffle the deck
 	this.cardDeck.cards = shuffle(this.cardDeck.cards);
 	for (var i = 0; i < 13; i++) {
 		for (var v = 0; v < 2; v++) {
 			for (var t = 0; t < 2; t++) {
 				this.teams[t].players[v].hand.push(this.cardDeck.cards[4*i+t+2*v]);
-				console.log(this.teams[t].players[v].hand);
 			}
 		}
 	}
@@ -36,7 +58,7 @@ GameCore.prototype.findPlayer = function (playerToFind, callback) {
 		for (var t = 0; t < numberOfPlayersAndTeams; t++) {
 			var currentPlayer = this.teams[t].players[i];
 			if (currentPlayer.userId == playerToFind.userId) {
-				callback();
+				callback(currentPlayer);
 			}
 		}
 	}
