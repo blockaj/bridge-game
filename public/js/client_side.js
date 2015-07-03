@@ -11,6 +11,7 @@
 // connects to the server and is then used to
 // let the server know what cards to give to who
 var USERID;
+var config = require('../../config.json');
 
 function cardToString(cardNumber) {
 	switch (cardNumber) {
@@ -179,7 +180,7 @@ function sortNumber (a, b) {
 	return a - b;
 }
 
-var socket = io.connect('http://localhost:3000');
+var socket = io.connect(config.server + ':' + config.port);
 
 socket.on('on_connected', function (data) {
 	USERID = data.id;
@@ -199,9 +200,10 @@ socket.on('ready', function () {
 
 socket.on('hand', function (data) {
 	var hand = data.hand.sort(sortNumber);
-	console.log(hand);
+	var position = data.position;
+	console.log(position);
 	$('.hand').html('');
-	placeCards(hand);
+	placeCards(hand, position);
 
 });
 
@@ -213,7 +215,7 @@ function removeLoadingEl() {
 	$('.number-of-players').remove();
 }
 
-function placeCards(hand) {
+function placeCards(hand, position) {
 	$('.partner').html('');
 	for (var i = 0; i < 13; i++) {
 		if (hand[i] > 13 && hand[i] < 40) {
@@ -223,6 +225,28 @@ function placeCards(hand) {
 			$('.hand').append('<span class="black card">' + cardToString(hand[i]) +
 							'</span>');
 		}
-		$('.partner').append('<span class="card">&#127136;</span>');
+	}
+	$('.position').html('<p>' + position + '</p>');
+
+
+	if (position == 'west') {
+		$('body').append('<div class="left"><p>North</p></div>');
+		$('body').append('<div class="top"><p>East</p></div>');
+		$('body').append('<div class="right"><p>South</p></div>');
+	}
+	else if (position == 'north') {
+		$('body').append('<div class="left"><p>East</p></div>');
+		$('body').append('<div class="top"><p>South</p></div>');
+		$('body').append('<div class="right"><p>West</p></div>');
+	}
+	else if (position == 'east') {
+		$('body').append('<div class="left"><p>South</p></div>');
+		$('body').append('<div class="top"><p>West</p></div>');
+		$('body').append('<div class="right"><p>North</p></div>');
+	}
+	else if (position =='south') {
+		$('body').append('<div class="left"><p>West</p></div>');
+		$('body').append('<div class="top"><p>North</p></div>');
+		$('body').append('<div class="right"><p>East</p></div>');
 	}
 }
