@@ -13,10 +13,10 @@ var express = require('express'),
 	http = require('http'),
 	io = require('socket.io'),
 	chalk = require('chalk'),
-	gameport = 3000,
+	config = require('./config.json'),
 
 	//Verbose is set to true for debugging
-	verbose = false,
+	verbose = config.verbose,
 
 	//Assigns unique id to socket.io client
 	UUID = require('node-uuid'),
@@ -30,10 +30,10 @@ var express = require('express'),
 var library = chalk.bold.red;
 
 //Express-related setup
-server.listen(gameport);
+server.listen(config.port);
 
 console.log('\t' + library(' :: Express ::') + ' Listening on port ' +
-			gameport);
+			config.port);
 
 app.get('/', function (req, res) {
 	res.sendFile(__dirname + '/views/index.html');
@@ -79,7 +79,10 @@ sio.sockets.on('connection', function (client) {
 
 	client.on('hand_request', function (data) {
 		GameHandle.findPlayer(newPlayer, function (currentPlayer) {
-			client.emit('hand', { hand: currentPlayer.hand });
+			client.emit('hand', {
+				hand: currentPlayer.hand,
+				position: currentPlayer.position
+			});
 		});
 	});
 	console.log('\t' + library(' :: socket.io :: ') + ' player ' +

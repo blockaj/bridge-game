@@ -15,20 +15,16 @@ var GameCore = function () {
 
 GameCore.prototype.assignTeams = function (players) {
 	this.teams[0].players = [players[0], players[2]];
+	
+	this.teams[0].players[0].position = 'north';
+	this.teams[0].players[1].position = 'south';
+
 	this.teams[1].players = [players[1], players[3]];
+
+	this.teams[1].players[0].position = 'east';
+	this.teams[1].players[1].position = 'west';
 };
 
-GameCore.prototype.assignPosition = function () {
-
-};
-
-GameCore.prototype.forEachPlayer = function(callback) {
-	for (var v = 0; v < 2; v++) {
-		for (var t = 0; t < 2; t++) {
-			
-		}
-	}
-};
 
 GameCore.prototype.cleanHands = function () {
 	for (var v = 0; v < 2; v++) {
